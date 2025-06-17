@@ -30,7 +30,7 @@ const show = (req, res) => {
 
         INNER JOIN reviews r
         ON m.id = r.movie_id
-        
+
         WHERE m.id = ?
     `;
 
@@ -45,7 +45,7 @@ const show = (req, res) => {
             genre: results[0].movie_genre,
             year: results[0].movie_year,
             abstract: results[0].movie_abstract,
-            image: results[0].movie_image,
+            image: `/images/${results[0].movie_image}`,
             reviews: results.map(r => ({
                 id: r.review_id,
                 name: r.review_name,
