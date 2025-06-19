@@ -57,5 +57,27 @@ const show = (req, res) => {
     });
 }
 
+const storeReview = (req, res) => {
+    const { id } = req.params;
+    const { name, vote, text } = req.body;
 
-module.exports = { index, show };
+    const sql = `
+        INSERT INTO movies.reviews (movie_id, name, vote, text) 
+        VALUES (?, ?, ?, ?)
+    `;
+
+    const StoreReviewsValues = [
+        id,
+        name,
+        vote,
+        text,
+    ]
+
+    db.query(sql, StoreReviewsValues, (err, results) => {
+        if (err) return res.status(500).json({ error:`Internal Server Error `, err });
+        console.log(results);
+        res.status(201).json({message: `Review Added`, id: results.insertId})
+    })
+}
+
+module.exports = { index, show , storeReview};

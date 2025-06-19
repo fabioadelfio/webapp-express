@@ -17,4 +17,6 @@ app.use('/movies', moviesRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-app.listen(3000, () => console.log("Server listening on http://localhost:3000"));
+const appPort = process.env.APP_PORT;
+
+app.listen(appPort, () => console.log("Server listening on http://localhost:3000"));
